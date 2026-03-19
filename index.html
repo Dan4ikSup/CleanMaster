@@ -1,0 +1,2082 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CleanMaster – Profesjonalne Usługi Sprzątające</title>
+    <meta name="description" content="CleanMaster – profesjonalna firma sprzątająca. Sprzątanie mieszkań, biur, po remontach. Sprawdź naszą ofertę!">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================
+           RESET & ZMIENNE
+        ============================================ */
+        :root {
+            --primary: #00a86b;
+            --primary-dark: #008f5b;
+            --primary-light: #e6f9f1;
+            --secondary: #1a73e8;
+            --dark: #1a1a2e;
+            --dark2: #16213e;
+            --gray: #6b7280;
+            --gray-light: #f3f4f6;
+            --white: #ffffff;
+            --shadow: 0 10px 40px rgba(0,0,0,0.08);
+            --shadow-hover: 0 20px 60px rgba(0,0,0,0.15);
+            --radius: 16px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul { list-style: none; }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ============================================
+           NAWIGACJA
+        ============================================ */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9999;
+            background: rgba(255,255,255,0.97);
+            backdrop-filter: blur(20px);
+            transition: var(--transition);
+            border-bottom: 1px solid transparent;
+        }
+
+        .navbar.scrolled {
+            box-shadow: 0 2px 30px rgba(0,0,0,0.1);
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .nav-logo {
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-logo .icon {
+            background: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .nav-logo span {
+            color: var(--primary);
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav-menu a {
+            font-weight: 500;
+            color: var(--gray);
+            font-size: 0.95rem;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2.5px;
+            background: var(--primary);
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary);
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--primary) !important;
+            color: white !important;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 600 !important;
+            font-size: 0.9rem !important;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0,168,107,0.3);
+        }
+
+        .nav-cta::after { display: none !important; }
+
+        .nav-cta:hover {
+            background: var(--primary-dark) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,168,107,0.4);
+        }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 6px;
+            z-index: 10000;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: var(--dark);
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Top Bar */
+        .top-bar {
+            background: var(--dark);
+            color: rgba(255,255,255,0.9);
+            font-size: 0.82rem;
+            padding: 8px 0;
+        }
+
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .top-bar a {
+            color: rgba(255,255,255,0.9);
+            transition: var(--transition);
+        }
+
+        .top-bar a:hover {
+            color: var(--primary);
+        }
+
+        .top-bar-left, .top-bar-right {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        /* ============================================
+           HERO
+        ============================================ */
+        .hero {
+            margin-top: 80px;
+            min-height: calc(100vh - 80px);
+            background: linear-gradient(165deg, #f0fdf4 0%, #e0f7fa 30%, #e8f5e9 60%, #f1f8e9 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(0,168,107,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(26,115,232,0.06) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+            padding-top: 40px;
+            padding-bottom: 40px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            margin-bottom: 20px;
+        }
+
+        .hero-badge .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.5); }
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            color: var(--dark);
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 .highlight {
+            color: var(--primary);
+            position: relative;
+        }
+
+        .hero h1 .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 12px;
+            background: rgba(0,168,107,0.15);
+            border-radius: 4px;
+            z-index: -1;
+        }
+
+        .hero-text {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: 35px;
+            max-width: 500px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 6px 25px rgba(0,168,107,0.35);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 35px rgba(0,168,107,0.45);
+        }
+
+        .btn-outline {
+            background: white;
+            color: var(--dark);
+            border: 2px solid #e5e7eb;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 35px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        /* Hero visual */
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image-box {
+            width: 100%;
+            max-width: 480px;
+            aspect-ratio: 4/3;
+            background: linear-gradient(135deg, var(--primary), #34d399);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            position: relative;
+            box-shadow: 0 30px 80px rgba(0,168,107,0.2);
+        }
+
+        .floating-card {
+            position: absolute;
+            background: white;
+            border-radius: 16px;
+            padding: 16px 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .floating-card:nth-child(2) {
+            top: 10%;
+            right: -20px;
+            animation-delay: 0.5s;
+        }
+
+        .floating-card:nth-child(3) {
+            bottom: 15%;
+            left: -30px;
+            animation-delay: 1s;
+        }
+
+        .floating-card:nth-child(4) {
+            bottom: -10px;
+            right: 10%;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .floating-card .fc-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .fc-green { background: #e6f9f1; }
+        .fc-blue { background: #e3f2fd; }
+        .fc-yellow { background: #fff8e1; }
+
+        .floating-card .fc-text strong {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--dark);
+        }
+
+        .floating-card .fc-text span {
+            font-size: 0.75rem;
+            color: var(--gray);
+        }
+
+        /* ============================================
+           PASEK ZAUFANIA
+        ============================================ */
+        .trust-bar {
+            background: white;
+            padding: 30px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .trust-bar .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        .trust-item .ti-icon {
+            font-size: 1.5rem;
+        }
+
+        /* ============================================
+           SEKCJA — OGÓLNE
+        ============================================ */
+        .section {
+            padding: 90px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-tag {
+            display: inline-block;
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 6px 18px;
+            border-radius: 50px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .section-header h2 {
+            font-size: 2.3rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            color: var(--gray);
+            font-size: 1.05rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ============================================
+           O NAS
+        ============================================ */
+        .about {
+            background: white;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-image {
+            background: linear-gradient(135deg, #e6f9f1, #e3f2fd);
+            border-radius: 24px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 7rem;
+            position: relative;
+        }
+
+        .about-image .experience-badge {
+            position: absolute;
+            bottom: -15px;
+            right: -15px;
+            background: var(--primary);
+            color: white;
+            padding: 18px 24px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,168,107,0.3);
+        }
+
+        .experience-badge .number {
+            font-size: 2rem;
+            font-weight: 800;
+            display: block;
+            line-height: 1;
+        }
+
+        .experience-badge .text {
+            font-size: 0.75rem;
+            opacity: 0.9;
+        }
+
+        .about-content h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+
+        .about-content h2 span {
+            color: var(--primary);
+        }
+
+        .about-content > p {
+            color: var(--gray);
+            margin-bottom: 25px;
+            font-size: 1rem;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .about-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .about-feature .check {
+            width: 24px;
+            height: 24px;
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        /* ============================================
+           USŁUGI
+        ============================================ */
+        .services {
+            background: var(--gray-light);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 35px 28px;
+            transition: var(--transition);
+            border: 1px solid #f0f0f0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .si-green { background: #e6f9f1; }
+        .si-blue { background: #e3f2fd; }
+        .si-purple { background: #f3e5f5; }
+        .si-orange { background: #fff3e0; }
+        .si-red { background: #fce4ec; }
+        .si-teal { background: #e0f2f1; }
+
+        .service-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .service-card p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .service-link {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: var(--transition);
+        }
+
+        .service-link:hover {
+            gap: 10px;
+        }
+
+        /* ============================================
+           JAK DZIAŁAMY
+        ============================================ */
+        .process {
+            background: white;
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            position: relative;
+        }
+
+        .process-grid::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 12%;
+            right: 12%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            z-index: 0;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin: 0 auto 20px;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .process-step:hover .step-number {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .process-step h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+
+        .process-step p {
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+
+        /* ============================================
+           DLACZEGO MY
+        ============================================ */
+        .why-us {
+            background: linear-gradient(165deg, var(--dark) 0%, var(--dark2) 100%);
+            color: white;
+        }
+
+        .why-us .section-tag {
+            background: rgba(0,168,107,0.2);
+        }
+
+        .why-us .section-header h2 {
+            color: white;
+        }
+
+        .why-us .section-header p {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .why-card {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--radius);
+            padding: 35px 25px;
+            text-align: center;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+
+        .why-card:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-5px);
+        }
+
+        .why-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .why-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .why-card p {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+        }
+
+        /* ============================================
+           CENNIK
+        ============================================ */
+        .pricing {
+            background: var(--gray-light);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 40px 30px;
+            text-align: center;
+            border: 2px solid #f0f0f0;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .pricing-card.popular {
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        .pricing-card.popular .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 4px 20px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .pricing-card.popular:hover {
+            transform: scale(1.05) translateY(-5px);
+        }
+
+        .pricing-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .pricing-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .pricing-card .price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .pricing-card .price small {
+            font-size: 1rem;
+            color: var(--gray);
+            font-weight: 400;
+        }
+
+        .pricing-card .price-note {
+            color: var(--gray);
+            font-size: 0.85rem;
+            margin-bottom: 25px;
+        }
+
+        .pricing-features {
+            text-align: left;
+            margin-bottom: 25px;
+        }
+
+        .pricing-features li {
+            padding: 8px 0;
+            font-size: 0.9rem;
+            color: #555;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-features .pf-check {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* ============================================
+           OPINIE
+        ============================================ */
+        .testimonials {
+            background: white;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .testimonial-card {
+            background: var(--gray-light);
+            border-radius: var(--radius);
+            padding: 30px;
+            transition: var(--transition);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .stars {
+            color: #fbbf24;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+
+        .testimonial-card p {
+            color: #555;
+            font-size: 0.95rem;
+            font-style: italic;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .author-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .author-info strong {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--dark);
+        }
+
+        .author-info span {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        /* ============================================
+           CTA
+        ============================================ */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary), #34d399);
+            padding: 80px 0;
+            text-align: center;
+            color: white;
+        }
+
+        .cta-section h2 {
+            font-size: 2.3rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--primary);
+            padding: 14px 36px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: var(--transition);
+            box-shadow: 0 6px 25px rgba(0,0,0,0.15);
+        }
+
+        .btn-white:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 35px rgba(0,0,0,0.25);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.5);
+            padding: 14px 36px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255,255,255,0.15);
+            border-color: white;
+        }
+
+        /* ============================================
+           KONTAKT
+        ============================================ */
+        .contact {
+            background: var(--gray-light);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .contact-info-cards {
+            display: grid;
+            gap: 20px;
+        }
+
+        .contact-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 25px;
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+            transition: var(--transition);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .cc-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: var(--primary-light);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .cc-text h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .cc-text p, .cc-text a {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        .cc-text a:hover {
+            color: var(--primary);
+        }
+
+        /* Formularz */
+        .contact-form {
+            background: white;
+            border-radius: var(--radius);
+            padding: 40px;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-form h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            outline: none;
+            background: #fafafa;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(0,168,107,0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            background: var(--primary);
+            color: white;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-submit:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,168,107,0.35);
+        }
+
+        /* ============================================
+           FOOTER
+        ============================================ */
+        .footer {
+            background: var(--dark);
+            color: rgba(255,255,255,0.8);
+            padding: 60px 0 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .footer-about .nav-logo {
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .footer-about p {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.6);
+        }
+
+        .footer h4 {
+            color: white;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer ul a {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .footer ul a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* ============================================
+           FLOATING BUTTON
+        ============================================ */
+        .float-phone {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9998;
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 6px 25px rgba(0,168,107,0.4);
+            transition: var(--transition);
+            animation: floatBtn 2s ease-in-out infinite;
+        }
+
+        .float-phone:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 35px rgba(0,168,107,0.5);
+        }
+
+        @keyframes floatBtn {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* ============================================
+           ANIMACJE SCROLL
+        ============================================ */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ============================================
+           RESPONSYWNOŚĆ
+        ============================================ */
+        @media (max-width: 1024px) {
+            .services-grid,
+            .why-grid,
+            .testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+            }
+
+            .pricing-card.popular {
+                transform: none;
+            }
+
+            .pricing-card.popular:hover {
+                transform: translateY(-5px);
+            }
+
+            .process-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .process-grid::before {
+                display: none;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                display: none;
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 30px;
+                gap: 20px;
+                box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .top-bar {
+                display: none;
+            }
+
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-text {
+                margin: 0 auto 35px;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .hero-visual {
+                display: none;
+            }
+
+            .about-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid,
+            .why-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .cta-section h2 {
+                font-size: 1.8rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== TOP BAR ===== -->
+<div class="top-bar">
+    <div class="container">
+        <div class="top-bar-left">
+            <span>📞 <a href="tel:+48123456789">+48 123 456 789</a></span>
+            <span>📧 <a href="mailto:kontakt@cleanmaster.pl">kontakt@cleanmaster.pl</a></span>
+        </div>
+        <div class="top-bar-right">
+            <span>⏰ Pon–Pt: 7:00–20:00 | Sob: 8:00–16:00</span>
+        </div>
+    </div>
+</div>
+
+<!-- ===== NAWIGACJA ===== -->
+<nav class="navbar" id="navbar">
+    <div class="container">
+        <a href="#" class="nav-logo">
+            <div class="icon">✨</div>
+            Clean<span>Master</span>
+        </a>
+        <div class="nav-menu" id="navMenu">
+            <a href="#o-nas">O nas</a>
+            <a href="#uslugi">Usługi</a>
+            <a href="#jak-dzialamy">Jak działamy</a>
+            <a href="#cennik">Cennik</a>
+            <a href="#opinie">Opinie</a>
+            <a href="#kontakt">Kontakt</a>
+            <a href="tel:+48123456789" class="nav-cta">📞 Zadzwoń</a>
+        </div>
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <div class="dot"></div>
+                Przyjmujemy zlecenia
+            </div>
+            <h1>
+                Profesjonalne<br>
+                <span class="highlight">sprzątanie</span><br>
+                na najwyższym poziomie
+            </h1>
+            <p class="hero-text">
+                Kompleksowe usługi sprzątające dla domów, mieszkań i biur. 
+                Zaufaj ekspertom — ponad 1000 zadowolonych klientów!
+            </p>
+            <div class="hero-buttons">
+                <a href="tel:+48123456789" class="btn btn-primary">📞 Darmowa wycena</a>
+                <a href="#uslugi" class="btn btn-outline">Zobacz ofertę →</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-number">1000+</div>
+                    <div class="stat-label">Klientów</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">5+</div>
+                    <div class="stat-label">Lat doświadczenia</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">4.9</div>
+                    <div class="stat-label">⭐ Średnia ocena</div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="hero-image-box">
+                🧹
+                <div class="floating-card">
+                    <div class="fc-icon fc-green">✅</div>
+                    <div class="fc-text">
+                        <strong>Ekologiczne środki</strong>
+                        <span>Bezpieczne dla rodziny</span>
+                    </div>
+                </div>
+                <div class="floating-card">
+                    <div class="fc-icon fc-blue">⚡</div>
+                    <div class="fc-text">
+                        <strong>Ekspresowa realizacja</strong>
+                        <span>Nawet w 24h</span>
+                    </div>
+                </div>
+                <div class="floating-card">
+                    <div class="fc-icon fc-yellow">⭐</div>
+                    <div class="fc-text">
+                        <strong>Gwarancja czystości</strong>
+                        <span>100% satysfakcji</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== PASEK ZAUFANIA ===== -->
+<div class="trust-bar">
+    <div class="container">
+        <div class="trust-item">
+            <span class="ti-icon">🛡️</span> Ubezpieczenie OC
+        </div>
+        <div class="trust-item">
+            <span class="ti-icon">🌿</span> Eko środki czystości
+        </div>
+        <div class="trust-item">
+            <span class="ti-icon">⏰</span> Punktualność
+        </div>
+        <div class="trust-item">
+            <span class="ti-icon">💯</span> Gwarancja jakości
+        </div>
+        <div class="trust-item">
+            <span class="ti-icon">📋</span> Faktura VAT
+        </div>
+    </div>
+</div>
+
+<!-- ===== O NAS ===== -->
+<section class="section about" id="o-nas">
+    <div class="container">
+        <div class="about-grid">
+            <div class="about-image fade-up">
+                🏢
+                <div class="experience-badge">
+                    <span class="number">5+</span>
+                    <span class="text">lat na rynku</span>
+                </div>
+            </div>
+            <div class="about-content fade-up">
+                <div class="section-tag">O nas</div>
+                <h2>Dbamy o <span>czystość</span> Twojej przestrzeni</h2>
+                <p>
+                    CleanMaster to zespół doświadczonych profesjonalistów, którzy od ponad 5 lat 
+                    dostarczają usługi sprzątające najwyższej jakości. Działamy na terenie 
+                    Warszawy i okolic.
+                </p>
+                <p>
+                    Używamy wyłącznie profesjonalnego sprzętu i ekologicznych środków czystości, 
+                    bezpiecznych dla dzieci, zwierząt domowych i alergików.
+                </p>
+                <div class="about-features">
+                    <div class="about-feature">
+                        <span class="check">✓</span> Wykwalifikowany zespół
+                    </div>
+                    <div class="about-feature">
+                        <span class="check">✓</span> Eko środki czystości
+                    </div>
+                    <div class="about-feature">
+                        <span class="check">✓</span> Profesjonalny sprzęt
+                    </div>
+                    <div class="about-feature">
+                        <span class="check">✓</span> Ubezpieczenie OC
+                    </div>
+                    <div class="about-feature">
+                        <span class="check">✓</span> Elastyczne terminy
+                    </div>
+                    <div class="about-feature">
+                        <span class="check">✓</span> Gwarancja jakości
+                    </div>
+                </div>
+                <a href="#kontakt" class="btn btn-primary">Poznaj nas bliżej →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== USŁUGI ===== -->
+<section class="section services" id="uslugi">
+    <div class="container">
+        <div class="section-header fade-up">
+            <div class="section-tag">Oferta</div>
+            <h2>Nasze usługi</h2>
+            <p>Kompleksowe rozwiązania dopasowane do Twoich potrzeb</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card fade-up">
+                <div class="service-icon si-green">🏠</div>
+                <h3>Sprzątanie mieszkań</h3>
+                <p>Regularne i jednorazowe sprzątanie domów i mieszkań. Każdy kąt lśni czystością.</p>
+                <a href="#kontakt" class="service-link">Zamów usługę →</a>
+            </div>
+            <div class="service-card fade-up">
+                <div class="service-icon si-blue">🏢</div>
+                <h3>Sprzątanie biur</h3>
+                <p>Profesjonalne utrzymanie czystości w biurach i przestrzeniach komercyjnych.</p>
+                <a href="#kontakt" class="service-link">Zamów usługę →</a>
+            </div>
+            <div class="service-card fade-up">
+                <div class="service-icon si-orange">🔨</div>
+                <h3>Sprzątanie po remoncie</h3>
+                <p>Gruntowne sprzątanie po pracach remontowych i budowlanych.</p>
+                <a href="#kontakt" class="service-link">Zamów usługę →</a>
+            </div>
+            <div class="service-card fade-up">
+                <div class="service-icon si-purple">✨</div>
+                <h3>Mycie okien</h3>
+                <p>Lśniące okna bez smug. Obsługujemy budynki mieszkalne i komercyjne.</p>
+                <a href="#kontakt" class="service-link">Zamów usługę →</a>
+            </div>
+            <div class="service-card fade-up">
+                <div class="service-icon si-red">🛋️</div>
+                <h3>Pranie tapicerki</h3>
+                <p>Profesjonalne czyszczenie kanap, foteli, dywanów i wykładzin.</p>
+                <a href="#kontakt" class="service-link">Zamów usługę →</a>
+            </div>
+            <div class="service-card fade-up">
+                <div class="service-icon si-teal">🏗️</div>
+                <h3>Klatki schodowe</h3>
+                <p>Regularne utrzymanie czystości w częściach wspólnych budynków.</p>
+                <a href="#kontakt" class="service-link">Zamów usługę →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== JAK DZIAŁAMY ===== -->
+<section class="section process" id="jak-dzialamy">
+    <div class="container">
+        <div class="section-header fade-up">
+            <div class="section-tag">Proces</div>
+            <h2>Jak działamy?</h2>
+            <p>Cztery proste kroki do lśniącej czystości</p>
+        </div>
+        <div class="process-grid">
+            <div class="process-step fade-up">
+                <div class="step-number">1</div>
+                <h3>Kontakt</h3>
+                <p>Zadzwoń lub napisz — opowiedz nam o swoich potrzebach</p>
+            </div>
+            <div class="process-step fade-up">
+                <div class="step-number">2</div>
+                <h3>Darmowa wycena</h3>
+                <p>Przygotujemy indywidualną ofertę dopasowaną do Ciebie</p>
+            </div>
+            <div class="process-step fade-up">
+                <div class="step-number">3</div>
+                <h3>Realizacja</h3>
+                <p>Nasz zespół przyjedzie w umówionym terminie i posprząta</p>
+            </div>
+            <div class="process-step fade-up">
+                <div class="step-number">4</div>
+                <h3>Gotowe!</h3>
+                <p>Ciesz się lśniącą czystością w swoim domu lub biurze</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== DLACZEGO MY ===== -->
+<section class="section why-us">
+    <div class="container">
+        <div class="section-header fade-up">
+            <div class="section-tag">Dlaczego my</div>
+            <h2>Co nas wyróżnia?</h2>
+            <p>Wybierz CleanMaster i przekonaj się sam</p>
+        </div>
+        <div class="why-grid">
+            <div class="why-card fade-up">
+                <div class="why-icon">⚡</div>
+                <h3>Szybka realizacja</h3>
+                <p>Przyjeżdżamy nawet w ciągu 24 godzin od zgłoszenia. Liczy się Twój czas.</p>
+            </div>
+            <div class="why-card fade-up">
+                <div class="why-icon">💰</div>
+                <h3>Uczciwe ceny</h3>
+                <p>Transparentny cennik bez ukrytych kosztów. Darmowa wycena przed rozpoczęciem.</p>
+            </div>
+            <div class="why-card fade-up">
+                <div class="why-icon">🌿</div>
+                <h3>Eko środki</h3>
+                <p>Używamy środków bezpiecznych dla dzieci, zwierząt i alergików.</p>
+            </div>
+            <div class="why-card fade-up">
+                <div class="why-icon">👨‍👩‍👧‍👦</div>
+                <h3>Zaufany zespół</h3>
+                <p>Nasi pracownicy są zweryfikowani, przeszkoleni i ubezpieczeni.</p>
+            </div>
+            <div class="why-card fade-up">
+                <div class="why-icon">🏆</div>
+                <h3>Gwarancja jakości</h3>
+                <p>Jeśli nie będziesz zadowolony — wrócimy i posprawiamy za darmo.</p>
+            </div>
+            <div class="why-card fade-up">
+                <div class="why-icon">📱</div>
+                <h3>Łatwy kontakt</h3>
+                <p>Jesteśmy dostępni telefonicznie, mailowo i przez formularz na stronie.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CENNIK ===== -->
+<section class="section pricing" id="cennik">
+    <div class="container">
+        <div class="section-header fade-up">
+            <div class="section-tag">Cennik</div>
+            <h2>Przystępne ceny</h2>
+            <p>Wybierz pakiet dopasowany do Twoich potrzeb</p>
+        </div>
+        <div class="pricing-grid">
+            <!-- Pakiet 1 -->
+            <div class="pricing-card fade-up">
+                <div class="pricing-icon">🏠</div>
+                <h3>Mieszkanie</h3>
+                <div class="price">150 zł <small>/ od</small></div>
+                <div class="price-note">Jednorazowe sprzątanie</div>
+                <ul class="pricing-features">
+                    <li><span class="pf-check">✓</span> Mieszkanie do 50m²</li>
+                    <li><span class="pf-check">✓</span> Kuchnia i łazienka</li>
+                    <li><span class="pf-check">✓</span> Odkurzanie i mycie podłóg</li>
+                    <li><span class="pf-check">✓</span> Ścieranie kurzu</li>
+                    <li><span class="pf-check">✓</span> Eko środki w cenie</li>
+                </ul>
+                <a href="#kontakt" class="btn btn-outline" style="width:100%;justify-content:center;">Zamów wycenę</a>
+            </div>
+            <!-- Pakiet 2 -->
+            <div class="pricing-card popular fade-up">
+                <div class="popular-badge">Najpopularniejszy</div>
+                <div class="pricing-icon">✨</div>
+                <h3>Pakiet Premium</h3>
+                <div class="price">250 zł <small>/ od</small></div>
+                <div class="price-note">Gruntowne sprzątanie</div>
+                <ul class="pricing-features">
+                    <li><span class="pf-check">✓</span> Mieszkanie do 100m²</li>
+                    <li><span class="pf-check">✓</span> Wszystko z pakietu podstawowego</li>
+                    <li><span class="pf-check">✓</span> Mycie okien</li>
+                    <li><span class="pf-check">✓</span> Czyszczenie sprzętów AGD</li>
+                    <li><span class="pf-check">✓</span> Pranie dywanów</li>
+                </ul>
+                <a href="#kontakt" class="btn btn-primary" style="width:100%;justify-content:center;">Zamów wycenę</a>
+            </div>
+            <!-- Pakiet 3 -->
+            <div class="pricing-card fade-up">
+                <div class="pricing-icon">🏢</div>
+                <h3>Biuro / Firma</h3>
+                <div class="price">800 zł <small>/ mies.</small></div>
+                <div class="price-note">Stała współpraca</div>
+                <ul class="pricing-features">
+                    <li><span class="pf-check">✓</span> Indywidualna wycena</li>
+                    <li><span class="pf-check">✓</span> Regularne sprzątanie</li>
+                    <li><span class="pf-check">✓</span> Faktura VAT</li>
+                    <li><span class="pf-check">✓</span> Dedykowany zespół</li>
+                    <li><span class="pf-check">✓</span> Elastyczne godziny</li>
+                </ul>
+                <a href="#kontakt" class="btn btn-outline" style="width:100%;justify-content:center;">Zamów wycenę</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== OPINIE ===== -->
+<section class="section testimonials" id="opinie">
+    <div class="container">
+        <div class="section-header fade-up">
+            <div class="section-tag">Opinie</div>
+            <h2>Co mówią nasi klienci?</h2>
+            <p>Dołącz do grona zadowolonych klientów CleanMaster</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card fade-up">
+                <div class="stars">★★★★★</div>
+                <p>„Fantastyczna ekipa! Mieszkanie po remoncie wyglądało jak nowe. Polecam każdemu, kto szuka profesjonalnej firmy sprzątającej."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">AK</div>
+                    <div class="author-info">
+                        <strong>Anna Kowalska</strong>
+                        <span>Warszawa, Mokotów</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card fade-up">
+                <div class="stars">★★★★★</div>
+                <p>„Korzystamy z usług CleanMaster od roku. Biuro zawsze lśni czystością, a pracownicy są niezwykle mili i punktualni."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">MN</div>
+                    <div class="author-info">
+                        <strong>Marek Nowak</strong>
+                        <span>Firma XYZ Sp. z o.o.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card fade-up">
+                <div class="stars">★★★★★</div>
+                <p>„Zamówiłam pranie kanapy i tapicerki — efekt przeszedł moje oczekiwania! Kanapa wygląda jak nowa. Na pewno wrócę po więcej!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">KW</div>
+                    <div class="author-info">
+                        <strong>Katarzyna Wiśniewska</strong>
+                        <span>Warszawa, Ursynów</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta-section">
+    <div class="container fade-up">
+        <h2>Gotowy na lśniącą czystość?</h2>
+        <p>Zadzwoń teraz i otrzymaj darmową wycenę. Odpowiadamy w ciągu 30 minut!</p>
+        <div class="cta-buttons">
+            <a href="tel:+48123456789" class="btn-white">📞 +48 123 456 789</a>
+            <a href="#kontakt" class="btn-ghost">✉️ Napisz do nas</a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== KONTAKT ===== -->
+<section class="section contact" id="kontakt">
+    <div class="container">
+        <div class="section-header fade-up">
+            <div class="section-tag">Kontakt</div>
+            <h2>Skontaktuj się z nami</h2>
+            <p>Chętnie odpowiemy na Twoje pytania</p>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-info-cards fade-up">
+                <div class="contact-card">
+                    <div class="cc-icon">📞</div>
+                    <div class="cc-text">
+                        <h4>Telefon</h4>
+                        <a href="tel:+48123456789">+48 123 456 789</a>
+                        <p>Pon–Pt: 7:00–20:00</p>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <div class="cc-icon">📧</div>
+                    <div class="cc-text">
+                        <h4>E-mail</h4>
+                        <a href="mailto:kontakt@cleanmaster.pl">kontakt@cleanmaster.pl</a>
+                        <p>Odpowiadamy w ciągu 1h</p>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <div class="cc-icon">📍</div>
+                    <div class="cc-text">
+                        <h4>Obszar działania</h4>
+                        <p>Warszawa i okolice (do 30 km)</p>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <div class="cc-icon">⏰</div>
+                    <div class="cc-text">
+                        <h4>Godziny pracy</h4>
+                        <p>Pon–Pt: 7:00–20:00</p>
+                        <p>Sob: 8:00–16:00</p>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form fade-up">
+                <h3>📩 Wyślij zapytanie</h3>
+                <form action="#" method="POST">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Imię i nazwisko</label>
+                            <input type="text" placeholder="Jan Kowalski" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Telefon</label>
+                            <input type="tel" placeholder="+48 ..." required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>E-mail</label>
+                        <input type="email" placeholder="jan@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Rodzaj usługi</label>
+                        <select required>
+                            <option value="" disabled selected>Wybierz usługę...</option>
+                            <option>Sprzątanie mieszkania</option>
+                            <option>Sprzątanie biura</option>
+                            <option>Sprzątanie po remoncie</option>
+                            <option>Mycie okien</option>
+                            <option>Pranie tapicerki</option>
+                            <option>Klatki schodowe</option>
+                            <option>Inne</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Wiadomość</label>
+                        <textarea placeholder="Opisz czego potrzebujesz..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">Wyślij zapytanie ✉️</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-about">
+                <div class="nav-logo">
+                    <div class="icon">✨</div>
+                    Clean<span>Master</span>
+                </div>
+                <p>
+                    Profesjonalna firma sprzątająca działająca na terenie Warszawy i okolic. 
+                    Zapewniamy najwyższą jakość usług i pełne zadowolenie klientów.
+                </p>
+            </div>
+            <div>
+                <h4>Usługi</h4>
+                <ul>
+                    <li><a href="#uslugi">Sprzątanie mieszkań</a></li>
+                    <li><a href="#uslugi">Sprzątanie biur</a></li>
+                    <li><a href="#uslugi">Po remoncie</a></li>
+                    <li><a href="#uslugi">Mycie okien</a></li>
+                    <li><a href="#uslugi">Pranie tapicerki</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Firma</h4>
+                <ul>
+                    <li><a href="#o-nas">O nas</a></li>
+                    <li><a href="#cennik">Cennik</a></li>
+                    <li><a href="#opinie">Opinie</a></li>
+                    <li><a href="#kontakt">Kontakt</a></li>
+                    <li><a href="#">Polityka prywatności</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Kontakt</h4>
+                <ul>
+                    <li><a href="tel:+48123456789">📞 +48 123 456 789</a></li>
+                    <li><a href="mailto:kontakt@cleanmaster.pl">📧 kontakt@cleanmaster.pl</a></li>
+                    <li>📍 Warszawa i okolice</li>
+                    <li>⏰ Pon–Pt: 7:00–20:00</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2025 CleanMaster. Wszelkie prawa zastrzeżone.</span>
+            <span>NIP: 1234567890</span>
+        </div>
+    </div>
+</footer>
+
+<!-- ===== FLOATING PHONE ===== -->
+<a href="tel:+48123456789" class="float-phone" title="Zadzwoń do nas">
+    📞
+</a>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+    // Menu mobilne
+    function toggleMenu() {
+        document.getElementById('navMenu').classList.toggle('active');
+        document.getElementById('hamburger').classList.toggle('active');
+    }
+
+    // Zamknij menu po kliknięciu
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            document.getElementById('navMenu').classList.remove('active');
+            document.getElementById('hamburger').classList.remove('active');
+        });
+    });
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+        const navbar = document.getElementById('navbar');
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    // Scroll animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, index * 100);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Formularz (demo)
+    document.querySelector('form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('✅ Dziękujemy za wiadomość! Oddzwonimy w ciągu 30 minut.');
+        e.target.reset();
+    });
+</script>
+
+</body>
+</html>
